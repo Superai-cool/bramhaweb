@@ -43,7 +43,14 @@
     .nav-links a{padding:10px 12px;border-radius:12px;color:var(--sub)}
     .nav-links a.active,.nav-links a:hover{color:var(--text);background:var(--muted)}
     .hamburger{display:none;flex-direction:column;gap:4px}
-    .hamburger span{width:24px;height:2px;background:#e5e7eb;border-radius:2px}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: 0.4s ease;
+}
 
     /* Mobile menu */
     .mobile{display:none}
