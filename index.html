@@ -201,6 +201,7 @@
       flex: 0 0 100%;
       user-select: none;
       pointer-events: none;
+      aspect-ratio: 4 / 3;
     }
     .carousel .nav {
       position: absolute;
@@ -320,19 +321,20 @@
       </div>
 
       <!-- NEW: slideshow -->
-<div class="about-pic">
-  <div class="carousel" id="aboutCarousel" aria-label="Bramha Café gallery">
-    <div class="slides">
-      <img src="images/about1.png" alt="Bramha Café — dining area">
-      <img src="images/about1.png" alt="Bramha Café — counter & decor">
-      <img src="images/about3.png" alt="Bramha Café — seating & ambience">
-    </div>
-    <button class="nav prev" aria-label="Previous">‹</button>
-    <button class="nav next" aria-label="Next">›</button>
-    <div class="dots" aria-hidden="true"></div>
-  </div>
-</div>
+      <div class="about-pic">
+        <div class="carousel" id="aboutCarousel" aria-label="Bramha Café gallery">
+          <div class="slides">
+            <img src="images/about1.png" alt="Bramha Café — dining area">
+            <img src="images/about1.png" alt="Bramha Café — counter & decor">
+            <img src="images/about3.png" alt="Bramha Café — seating & ambience">
+          </div>
+          <button class="nav prev" aria-label="Previous">‹</button>
+          <button class="nav next" aria-label="Next">›</button>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+      </div>
 
+    </div>
   </section>
 
   <!-- Team -->
@@ -522,6 +524,7 @@
         const d = document.createElement('button');
         d.className = 'dot' + (idx===0 ? ' active' : '');
         d.type = 'button';
+        d.setAttribute('aria-label', `Go to slide ${idx+1}`);
         d.addEventListener('click', ()=>goTo(idx, true));
         dotsWrap.appendChild(d);
       });
