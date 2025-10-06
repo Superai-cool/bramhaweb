@@ -75,11 +75,15 @@
     .section-title:hover::after{width:100%}
     .section-sub{color:var(--sub);margin:0 0 24px}
 
-   .about {
+  .about { 
   display: grid;
   grid-template-columns: 1fr 1fr;  /* text left, slideshow right */
   gap: 28px;
   align-items: start;              /* align from top, not center */
+}
+
+.about > * {
+  min-width: 0;   /* allow both text and image to shrink inside their grid cells */
 }
 
 .about-pic {
