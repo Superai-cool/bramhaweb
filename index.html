@@ -18,15 +18,15 @@
   <style>
     /* --------- THEME (light / maroon) --------- */
     :root{
-      --bg:#ffffff;                     /* page background */
-      --bg-glow:#fff8f0;               /* subtle warm glow */
-      --panel:#ffffff;                 /* cards / panels */
-      --muted:#f5f5f7;                 /* soft hover chips bg */
-      --border:#ececf1;                /* light borders */
-      --text:#5a3d3a;                  /* brick text */
-      --sub:#8a6d69;                   /* lighter brick */
-      --brand:#7a1124;                 /* maroon */
-      --brand-2:#9a1a31;               /* maroon hover */
+      --bg:#ffffff;
+      --bg-glow:#fff8f0;
+      --panel:#ffffff;
+      --muted:#f5f5f7;
+      --border:#ececf1;
+      --text:#5a3d3a;
+      --sub:#8a6d69;
+      --brand:#7a1124;
+      --brand-2:#9a1a31;
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:18px;
     }
@@ -134,11 +134,12 @@
     .usps{display:flex;flex-wrap:wrap;gap:10px}
     .usps .chip{background:#fff}
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* force 4 equal columns */
-  gap: 18px;
-}
+    /* Team grid fixed 4 columns on desktop */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
     .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
     .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
     .avatar{aspect-ratio:1;border-radius:12px;background:#f5f5f7;border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
@@ -177,6 +178,72 @@
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
+    }
+
+    /* ====== About Carousel (NEW) ====== */
+    .carousel {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .carousel .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform .45s ease;
+    }
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex: 0 0 100%;
+      user-select: none;
+      pointer-events: none;
+    }
+    .carousel .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      color: var(--brand);
+      font-size: 22px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,.08);
+      cursor: pointer;
+    }
+    .carousel .nav:hover { background:#fff1f3; }
+    .carousel .nav.prev { left: 10px; }
+    .carousel .nav.next { right: 10px; }
+
+    .carousel .dots {
+      position: absolute;
+      left: 0; right: 0; bottom: 10px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    .carousel .dot {
+      width: 7px; height: 7px;
+      border-radius: 999px;
+      background: rgba(122,17,36,.25);
+      border: 1px solid rgba(122,17,36,.15);
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+    .carousel .dot.active {
+      background: var(--brand);
+      transform: scale(1.2);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .carousel .slides { transition: none; }
     }
   </style>
 </head>
@@ -252,8 +319,18 @@
         </div>
       </div>
 
+      <!-- NEW: slideshow -->
       <div class="about-pic">
-        <img src="images/about.png" alt="Inside Bramha Café" style="width:100%;height:auto;object-fit:cover;">
+        <div class="carousel" id="aboutCarousel" aria-label="Bramha Café gallery">
+          <div class="slides">
+            <img src="images/about/1.jpg" alt="Bramha Café — dining area">
+            <img src="images/about/2.jpg" alt="Bramha Café — counter & decor">
+            <img src="images/about/3.jpg" alt="Bramha Café — seating & ambience">
+          </div>
+          <button class="nav prev" aria-label="Previous">‹</button>
+          <button class="nav next" aria-label="Next">›</button>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -263,48 +340,41 @@
     <h2 class="section-title">Our Team</h2>
     <p class="section-sub">People behind Bramha Cafe.</p>
     <div class="team-grid">
-     <article class="card">
-  <div class="avatar">
-    <img src="images/team/shashank.jpg"
-         alt="Shashank Bhandari — Founder & CEO"
-         loading="lazy">
-  </div>
-  <h3>Shashank Bhandari</h3>
-  <p class="role">Founder & CEO</p>
-  <p class="muted">A serial entrepreneur with 10+ years in the food industry, he has built and scaled multiple brands from scratch with vision and hands-on leadership.</p>
-</article>
+      <article class="card">
+        <div class="avatar">
+          <img src="images/team/shashank.jpg" alt="Shashank Bhandari — Founder & CEO" loading="lazy">
+        </div>
+        <h3>Shashank Bhandari</h3>
+        <p class="role">Founder & CEO</p>
+        <p class="muted">A serial entrepreneur with 10+ years in the food industry, he has built and scaled multiple brands from scratch with vision and hands-on leadership.</p>
+      </article>
 
       <article class="card">
-  <div class="avatar">
-    <img src="images/team/raghav.jpg"
-         alt="Raghav Shetty — Head of Operations"
-         loading="lazy">
-  </div>
-  <h3>Raghav Shetty</h3>
-  <p class="role">Head of Operations</p>
-  <p class="muted">A seasoned operations head with 10+ years of experience, he excels at optimizing systems and driving sustainable business performance.</p>
-</article>
-       <article class="card">
-  <div class="avatar">
-    <img src="images/team/parmesh.jpg"
-         alt="Parmesh — Head Chef"
-         loading="lazy">
-  </div>
-  <h3>Parmesh</h3>
-  <p class="role">Head Chef</p>
-  <p class="muted">A seasoned chef with 10+ years of experience, he blends tradition with innovation to craft unforgettable flavors.</p>
-</article>
-     
-          <article class="card">
-  <div class="avatar">
-    <img src="images/team/govind.jpg"
-         alt="Govind Moghekar — Head of Marketing"
-         loading="lazy">
-  </div>
-  <h3>Govind Moghekar</h3>
-  <p class="role">Head of Marketing</p>
-  <p class="muted">A seasoned 5+ year expert, he drives business growth through innovative marketing and strategic expansion.</p>
-</article>
+        <div class="avatar">
+          <img src="images/team/raghav.jpg" alt="Raghav Shetty — Head of Operations" loading="lazy">
+        </div>
+        <h3>Raghav Shetty</h3>
+        <p class="role">Head of Operations</p>
+        <p class="muted">A seasoned operations head with 10+ years of experience, he excels at optimizing systems and driving sustainable business performance.</p>
+      </article>
+
+      <article class="card">
+        <div class="avatar">
+          <img src="images/team/parmesh.jpg" alt="Parmesh — Head Chef" loading="lazy">
+        </div>
+        <h3>Parmesh</h3>
+        <p class="role">Head Chef</p>
+        <p class="muted">A seasoned chef with 10+ years of experience, he blends tradition with innovation to craft unforgettable flavors.</p>
+      </article>
+
+      <article class="card">
+        <div class="avatar">
+          <img src="images/team/govind.jpg" alt="Govind Moghekar — Head of Marketing" loading="lazy">
+        </div>
+        <h3>Govind Moghekar</h3>
+        <p class="role">Head of Marketing</p>
+        <p class="muted">A seasoned 5+ year expert, he drives business growth through innovative marketing and strategic expansion.</p>
+      </article>
     </div>
   </section>
 
@@ -375,7 +445,7 @@
     const sections = ['home','about','team','menu','contact'];
     const headerLinks = document.querySelectorAll('.nav-links a');
     const setActive = () => {
-      let idx = 0, y = scrollY + 120; // header offset
+      let idx = 0, y = scrollY + 120;
       sections.forEach((id,i)=>{const el=document.getElementById(id); if(el && el.offsetTop <= y) idx=i;});
       headerLinks.forEach((ln,i)=> ln.classList.toggle('active', i===idx));
     };
@@ -432,6 +502,65 @@
         render(btn.dataset.filter);
       })
     });
+
+    /* ====== About Carousel JS (NEW) ====== */
+    (function initAboutCarousel(){
+      const root = document.getElementById('aboutCarousel');
+      if(!root) return;
+
+      const slidesWrap = root.querySelector('.slides');
+      const images = Array.from(root.querySelectorAll('img'));
+      const prevBtn = root.querySelector('.nav.prev');
+      const nextBtn = root.querySelector('.nav.next');
+      const dotsWrap = root.querySelector('.dots');
+
+      let i = 0;
+      let auto, isHover = false;
+
+      // dots
+      images.forEach((_, idx)=>{
+        const d = document.createElement('button');
+        d.className = 'dot' + (idx===0 ? ' active' : '');
+        d.type = 'button';
+        d.addEventListener('click', ()=>goTo(idx, true));
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+      function goTo(idx, user=false){
+        i = (idx + images.length) % images.length;
+        slidesWrap.style.transform = `translateX(-${i * 100}%)`;
+        dots.forEach((d,k)=>d.classList.toggle('active', k===i));
+        if(user) restart();
+      }
+      function next(){ goTo(i+1); }
+      function prev(){ goTo(i-1); }
+
+      // autoplay
+      function start(){ auto = setInterval(next, 4000); }
+      function stop(){ clearInterval(auto); }
+      function restart(){ stop(); if(!isHover) start(); }
+
+      // controls
+      nextBtn.addEventListener('click', ()=>goTo(i+1, true));
+      prevBtn.addEventListener('click', ()=>goTo(i-1, true));
+
+      // pause on hover
+      root.addEventListener('mouseenter', ()=>{ isHover = true; stop(); });
+      root.addEventListener('mouseleave', ()=>{ isHover = false; start(); });
+
+      // swipe
+      let sx = 0, dx = 0;
+      root.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; dx = 0; }, {passive:true});
+      root.addEventListener('touchmove',  e=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
+      root.addEventListener('touchend',  ()=>{
+        if(Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+        restart();
+      });
+
+      goTo(0);
+      start();
+    })();
   </script>
 </body>
 </html>
