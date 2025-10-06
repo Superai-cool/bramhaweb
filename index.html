@@ -5,253 +5,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bramha Café — South Indian Restaurant</title>
   <meta name="description" content="Bramha Café — Authentic South Indian flavours, filter coffee, and premium ambience in HSR. Pure Veg. Order now on Swiggy or Zomato."/>
-<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <meta property="og:title" content="Bramha Café — South Indian Restaurant"/>
   <meta property="og:description" content="Authentic South Indian flavours, filter coffee & premium ambience in HSR."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:image" content="https://dummyimage.com/1200x630/0b0b0b/f5f5f5&text=Bramha+Caf%C3%A9"/>
-  <meta name="theme-color" content="#0b0b0b"/>
+  <meta property="og:image" content="https://dummyimage.com/1200x630/fdfdfc/6b3a36&text=Bramha+Caf%C3%A9"/>
+  <meta name="theme-color" content="#fdfdfc"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    /* ==== Light / Maroon Theme Tokens ==== */
     :root{
-      --bg:#0b0b0b;--panel:#111214;--muted:#1a1c1f;--card:#121316;--text:#f1f5f9;--sub:#b6c0cc;--brand:#f2a900;--brand-2:#2ad39a;--accent:#ffd166;--red:#ff6363;--green:#36d399;
-      --shadow: 0 10px 30px rgba(0,0,0,.4);
-      --radius:18px;
+      --bg:#fdfdfc;                 /* glowing off-white */
+      --panel:#ffffff;              
+      --muted:#f4f4f6;              
+      --card:#ffffff;               
+      --text:#4a2c2a;               /* brick text */
+      --sub:#7b4b46;                /* lighter brick */
+      --brand:#7a1124;              /* maroon */
+      --brand-2:#a0522d;            /* sienna / secondary */
+      --accent:#ffd166;
+      --red:#b33a3a;
+      --green:#25d366;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --radius:20px;                /* rounded look for buttons/cards */
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-   body {
-  margin:0;
-  font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
-  background:linear-gradient(180deg,var(--bg),#0e0f12 35%,#0b0b0b);
-  color:var(--text);
-}
-
+    body{
+      margin:0;
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+      background:
+        radial-gradient(1000px 500px at 10% -10%, #fff9f1 0%, transparent 60%),
+        radial-gradient(800px 400px at 90% -10%, #fffaf5 0%, transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{width:min(1200px,92%);margin-inline:auto}
 
-/* Header */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(11, 11, 11, 0.65);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom: 1px solid #15171a;
-}
+    /* ==== Header (light, sticky) ==== */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(255,255,255,.75);
+      backdrop-filter:saturate(140%) blur(8px);
+      border-bottom:1px solid #ececec;
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand-logo{
+      width:36px;height:36px;display:grid;place-items:center;border-radius:10px;
+      background:linear-gradient(135deg,#ffecd2,#ffd166);
+      color:#7a1124;font-weight:800;box-shadow:var(--shadow)
+    }
+    .brand-name{font-weight:800;letter-spacing:.2px;color:var(--brand)}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{padding:10px 12px;border-radius:12px;color:var(--sub)}
+    .nav-links a.active,.nav-links a:hover{color:var(--brand);background:var(--muted);}
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 0;
-}
+    /* Hamburger (maroon lines on light bg) */
+    .hamburger{display:none;flex-direction:column;justify-content:space-between;width:26px;height:18px;background:none;border:0;padding:0;margin:0;cursor:pointer}
+    .hamburger span{display:block;width:100%;height:2px;background-color:var(--brand);border-radius:1px;transition:all .3s ease}
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    /* Mobile menu (light) */
+    .mobile{display:none}
+    .mobile.open{display:block;border-top:1px solid #ececec;background:#fff}
+    .mobile a{display:block;padding:16px 16px;font-size:16px;border-bottom:1px solid #f0f0f0;color:var(--sub)}
+    .mobile a:hover{background:var(--muted);color:var(--brand)}
 
-.brand-logo {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand), #ffcf4d);
-  color: #000;
-  font-weight: 800;
-  box-shadow: var(--shadow);
-}
+    @media (max-width:768px){
+      .hamburger{display:flex}
+      .nav-links{display:none}
+    }
 
-.brand-name {
-  font-weight: 800;
-  letter-spacing: 0.2px;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-links a {
-  padding: 10px 12px;
-  border-radius: 12px;
-  color: var(--sub);
-}
-
-.nav-links a.active,
-.nav-links a:hover {
-  color: var(--text);
-  background: var(--muted);
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between; /* evenly space 3 lines */
-  width: 26px;   /* width of hamburger */
-  height: 18px;  /* total height (compact) */
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: white;
-  border-radius: 1px;
-  transition: all 0.3s ease;
-}
-
-/* Mobile menu */
-.mobile {
-  display: none;
-}
-
-.mobile.open {
-  display: block;
-  border-top: 1px solid #17191c;
-  background: #0d0e10;
-}
-
-.mobile a {
-  display: block;
-  padding: 16px 16px;
-  font-size: 16px;
-  border-bottom: 1px solid #15171a;
-  color: var(--sub);
-}
-
-.mobile a:hover {
-  background: var(--muted);
-  color: var(--text);
-}
-
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-  }
-}
-
-    /* Hero */
+    /* ==== Hero ==== */
     .hero{position:relative;isolation:isolate}
     .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:64px 0}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(242,169,0,.12);color:#ffd166;border:1px solid rgba(242,169,0,.35)}
-    h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:14px 0 10px}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+      background:#fff4e0;color:#8a4b00;border:1px solid #ffd79a
+    }
+    h1{font-size:clamp(28px,5vw,56px);line-height:1.05;margin:14px 0 10px;color:var(--brand);font-weight:800}
     .lead{font-size:clamp(15px,2.6vw,18px);color:var(--sub);max-width:60ch}
+
     .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid #2a2d31;background:#14161a;color:#e6edf5;transition:.2s;box-shadow:0 2px 0 #0e0f12}
-    .btn:hover{transform:translateY(-1px);background:#171a1f}
-    .btn.primary{background:linear-gradient(135deg,var(--brand),#ffcf4d);color:#000;border-color:#ffcf4d}
-    .btn.ghost{background:transparent;border-color:#24272b}
+
+    /* Generic maroon button */
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 20px;
+      border-radius:var(--radius);border:2px solid var(--brand);
+      background:var(--brand);color:#fff;font-weight:600;
+      transition:all .28s ease;box-shadow:0 4px 12px rgba(122,17,36,.18)
+    }
+    .btn:hover{background:#9a1a31;border-color:#9a1a31;transform:translateY(-2px)}
+
+    /* Keep brand colors for these CTAs */
+    .btn.swiggy{background:#fc8019;border-color:#fc8019}
+    .btn.swiggy:hover{background:#e5710f;border-color:#e5710f}
+    .btn.zomato{background:#e23744;border-color:#e23744}
+    .btn.zomato:hover{background:#c62837;border-color:#c62837}
+
     .trust{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-    .chip{padding:8px 12px;border:1px solid #25282d;border-radius:999px;color:#cbd5e1;background:#101215}
-    .hero-card{background:radial-gradient(1200px 400px at 0% 0%,rgba(242,169,0,.08),transparent 60%),var(--card);border:1px solid #1a1c20;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
-    .hero-img{aspect-ratio:4/3;border-radius:14px;background:linear-gradient(135deg,#1a1b1f,#0e0f12);border:1px solid #1a1c20;overflow:hidden}
+    .chip{padding:8px 12px;border:1px solid #eadede;border-radius:999px;color:var(--sub);background:#fff}
+
+    .hero-card{
+      background:var(--card);border:1px solid #eee;border-radius:var(--radius);
+      padding:16px;box-shadow:var(--shadow)
+    }
+    .hero-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
     .hero-img .plate{width:100%;height:100%;display:grid;place-items:center;color:#9aa5b1}
 
     section{padding:56px 0}
-    section .section-title{font-size:clamp(22px,3.4vw,34px);margin:0 0 8px}
+    section .section-title{font-size:clamp(22px,3.4vw,34px);margin:0 0 8px;color:var(--brand);font-weight:800}
     .section-sub{color:var(--sub);margin:0 0 24px}
-    /* Swiggy Button */
-.btn.swiggy {
-  background-color: #fc8019;
-  color: #fff;
-  border: none;
-}
-.btn.swiggy:hover {
-  background-color: #e5710f;
-  color: #fff;
-}
 
-/* Zomato Button */
-.btn.zomato {
-  background-color: #e23744;
-  color: #fff;
-  border: none;
-}
-.btn.zomato:hover {
-  background-color: #c62837;
-  color: #fff;
-}
-
-
-    /* About */
+    /* ==== About ==== */
     .about{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    .about-pic{border-radius:16px;overflow:hidden;border:1px solid #191b1f;background:linear-gradient(135deg,#14161a,#0f1013)}
-    .usps{display:flex;flex-wrap:wrap;gap:10px}
-    .usps .chip{background:#0f1013}
+    .about-pic{border-radius:16px;overflow:hidden;border:1px solid #eee;background:#fff}
 
-    /* Team */
+    /* ==== Team ==== */
     .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .card{background:var(--card);border:1px solid #1a1c20;border-radius:16px;padding:16px;transition:.25s}
+    .card{background:var(--card);border:1px solid #eee;border-radius:16px;padding:16px;transition:.25s;box-shadow:0 2px 10px rgba(0,0,0,.03)}
     .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-    .avatar{aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#202228,#121316);border:1px solid #20232a;margin-bottom:12px;overflow:hidden}
-    .role{color:#9fb0c2;font-size:.95rem}
+    .avatar{aspect-ratio:1;border-radius:12px;background:#faf9f7;border:1px solid #eee;margin-bottom:12px;overflow:hidden}
+    .role{color:#8a5a55;font-size:.95rem}
 
-    /* Menu */
+    /* ==== Menu ==== */
     .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
-    .filter{padding:10px 14px;border-radius:12px;border:1px solid #24272c;background:#0f1114;color:#cfd8e3;cursor:pointer}
-    .filter.active,.filter:hover{background:#171a1f;color:#fff}
+    .filter{padding:10px 14px;border-radius:12px;border:1px solid #e7d9d9;background:#fff;color:var(--sub);cursor:pointer}
+    .filter.active,.filter:hover{background:#fff1f3;color:var(--brand);border-color:#f0cdd3}
     .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .menu-card{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid #1a1c20;border-radius:16px;padding:12px}
-    .thumb{width:90px;aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#1d1f24,#101114);border:1px solid #24262c;flex:0 0 auto}
-    .tag{font-size:.75rem;padding:6px 8px;border-radius:999px;border:1px solid #2a2d31;background:#121319;color:#e6edf5}
-    .price{margin-left:auto;font-weight:700;color:#ffe08a}
+    .menu-card{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid #eee;border-radius:16px;padding:12px}
+    .thumb{width:90px;aspect-ratio:1;border-radius:12px;background:#faf9f7;border:1px solid #eee;flex:0 0 auto}
+    .tag{font-size:.75rem;padding:6px 8px;border-radius:999px;border:1px solid #f0cdd3;background:#fff1f3;color:#a22}
+    .price{margin-left:auto;font-weight:700;color:#7a1124}
 
-    /* Contact */
+    /* ==== Contact ==== */
     .contact-wrap{display:grid;grid-template-columns:1fr;gap:18px}
-    .map{min-height:280px;border-radius:16px;border:1px solid #1a1c20;background:linear-gradient(135deg,#1a1b1f,#0e0f12)}
+    .map{min-height:280px;border-radius:16px;border:1px solid #eee;background:#fff}
 
-    /* Footer */
-footer {
-  border-top: 1px solid #15171a;
-  background: #0b0c0f;
-  padding: 24px 0;
-  color: #9fb0c2;
-}
-
-.foot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 0;
-  text-align: center;
-}
-
-
+    /* ==== Footer ==== */
+    footer{border-top:1px solid #eee;background:#fff;padding:24px 0;color:#8a5a55}
+    .foot{display:flex;justify-content:center;align-items:center;padding:16px 0;text-align:center}
 
     /* Utilities */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-    /* Responsive */
-    @media (max-width: 1024px){
+    /* Responsive tweaks */
+    @media (max-width:1024px){
       .hero-wrap,.about{grid-template-columns:1fr}
       .team-grid{grid-template-columns:repeat(2,1fr)}
       .menu-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media (max-width: 680px){
-      .nav-links{display:none}
-      .hamburger{display:flex}
-      .menu-grid{grid-template-columns:1fr}
-      .team-grid{grid-template-columns:1fr}
+    @media (max-width:680px){
+      .menu-grid,.team-grid{grid-template-columns:1fr}
       .hero-wrap{padding:34px 0}
       section{padding:44px 0}
     }
@@ -263,17 +174,18 @@ footer {
     }
   </style>
 </head>
+
 <body>
   <!-- Header -->
   <header aria-label="Primary">
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Bramha Café home">
-       <div class="brand">
-  <img src="images/bramha-logo.png" alt="Bramha Café Logo" style="height:36px; border-radius:10px;" />
-  <div class="brand-name">Bramha Café</div>
-</div>
-
+        <div class="brand">
+          <img src="images/bramha-logo.png" alt="Bramha Café Logo" style="height:36px; border-radius:10px;" />
+          <div class="brand-name">Bramha Café</div>
+        </div>
       </a>
+
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#about">About Us</a>
@@ -281,10 +193,12 @@ footer {
         <a href="#menu">Menu</a>
         <a href="#contact">Contact Us</a>
       </nav>
+
       <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
         <span></span><span></span><span></span>
       </button>
     </div>
+
     <div id="mobileNav" class="mobile" role="dialog" aria-label="Mobile menu">
       <div class="container">
         <a href="#home">Home</a>
@@ -296,92 +210,86 @@ footer {
     </div>
   </header>
 
- <!-- Hero -->
-<main id="home" class="hero">
-  <div class="container hero-wrap">
-    <div>
-      <span class="badge" aria-label="Pure Veg & Authentic">🌿 Pure Veg • Authentic Taste</span>
-      <h1>South Indian Flavours, Crafted with Love.</h1>
-      <p class="lead">Crispy dosas, fluffy idlis, aromatic sambar and the city’s favourite filter coffee — served fresh in a premium ambience. Made daily. Made right.</p>
-      <div class="cta" role="group" aria-label="Primary actions">
-  <a class="btn swiggy" href="https://www.swiggy.com/city/bangalore/bramha-cafe-hsr-layout-rest966996" target="_blank" rel="noopener">Order on Swiggy</a>
-  <a class="btn zomato" href="https://www.zomato.com/bangalore/bramha-cafe-2-hsr-bangalore/orderm" target="_blank" rel="noopener">Order on Zomato</a>
-</div>
+  <!-- Hero -->
+  <main id="home" class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <span class="badge" aria-label="Pure Veg & Authentic">🌿 Pure Veg • Authentic Taste</span>
+        <h1>South Indian Flavours, Crafted with Love.</h1>
+        <p class="lead">Crispy dosas, fluffy idlis, aromatic sambar and the city’s favourite filter coffee — served fresh in a premium ambience. Made daily. Made right.</p>
 
+        <div class="cta" role="group" aria-label="Primary actions">
+          <a class="btn swiggy" href="https://www.swiggy.com/city/bangalore/bramha-cafe-hsr-layout-rest966996" target="_blank" rel="noopener">Order on Swiggy</a>
+          <a class="btn zomato" href="https://www.zomato.com/bangalore/bramha-cafe-2-hsr-bangalore/orderm" target="_blank" rel="noopener">Order on Zomato</a>
+        </div>
 
-      <div class="trust">
-        <span class="chip">🧼 Hygienic Kitchen</span>
-        <span class="chip">✨ Elegant Vibe</span>
+        <div class="trust">
+          <span class="chip">🧼 Hygienic Kitchen</span>
+          <span class="chip">✨ Elegant Vibe</span>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Featured ambience">
+        <div class="hero-img" aria-hidden="true">
+          <img src="images/hero.png" alt="Bramha Café Ambience" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- About -->
+  <section id="about" class="container" style="max-width: 1200px; margin: 0 auto; padding: 3rem 1rem 2rem;">
+    <h2 class="section-title" style="margin-bottom: 1.5rem;">About Us</h2>
+
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:2rem;">
+      <div style="flex:1 1 500px; min-width:280px;">
+        <p style="font-size:1rem; line-height:1.8; margin:0;">
+          At <strong style="color:var(--brand)">Bramha Café</strong>, tradition meets precision. We source quality ingredients, follow time-honoured recipes, and plate with contemporary finesse — all while keeping it comforting and quick.
+        </p>
+        <div class="usps" style="margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem;">
+          <span class="chip" role="listitem">🥥 Fresh Coconut Chutneys</span>
+          <span class="chip" role="listitem">🥘 Crispy, Golden Dosas</span>
+          <span class="chip" role="listitem">🍛 Aromatic Sambar</span>
+          <span class="chip" role="listitem">☕ Filter Coffee</span>
+        </div>
+      </div>
+
+      <div style="flex:1 1 400px; min-width:280px;">
+        <img src="images/about.png" alt="Inside Bramha Café" style="width:100%; height:auto; object-fit:cover; border-radius:16px;">
       </div>
     </div>
-    <aside class="hero-card" aria-label="Featured ambience">
-      <div class="hero-img" aria-hidden="true">
-        <img src="images/hero.png" alt="Bramha Café Ambience" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
-      </div>
-    </aside>
-  </div>
-</main>
-
-
-<!-- About -->
-<section id="about" class="container" style="max-width: 1200px; margin: 0 auto; padding: 3rem 1rem 2rem;">
-  <h2 class="section-title" style="margin-bottom: 1.5rem;">About Us</h2>
-
-  <div style="
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 2rem;
-  ">
-    <!-- Text Block -->
-    <div style="flex: 1 1 500px; min-width: 280px;">
-      <p style="font-size: 1rem; line-height: 1.8; margin: 0;">
-        At <strong>Bramha Café</strong>, tradition meets precision. We source quality ingredients, follow time-honoured recipes, and plate with contemporary finesse — all while keeping it comforting and quick.
-      </p>
-      <div class="usps" style="margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-        <span class="chip" role="listitem">🥥 Fresh Coconut Chutneys</span>
-        <span class="chip" role="listitem">🥘 Crispy, Golden Dosas</span>
-        <span class="chip" role="listitem">🍛 Aromatic Sambar</span>
-        <span class="chip" role="listitem">☕ Filter Coffee</span>
-      </div>
-    </div>
-
-    <!-- Image Block -->
-    <div style="flex: 1 1 400px; min-width: 280px;">
-      <img src="images/about.png"
-           alt="Inside Bramha Café"
-           style="width: 100%; height: auto; object-fit: cover; border-radius: 16px;">
-    </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Team -->
   <section id="team" class="container">
     <h2 class="section-title">Our Team</h2>
     <p class="section-sub">People behind Bramha Cafe.</p>
+
     <div class="team-grid">
       <article class="card">
         <div class="avatar" aria-hidden="true"></div>
-        <h3>Shashank Bhandari</h3>
-        <p class="role">Founder & CEO </p>
+        <h3 style="color:var(--brand)">Shashank Bhandari</h3>
+        <p class="role">Founder & CEO</p>
         <p class="muted">A serial entrepreneur with 10+ years in the food industry, he has built and scaled multiple brands from scratch with vision and hands-on leadership.</p>
       </article>
+
       <article class="card">
         <div class="avatar" aria-hidden="true"></div>
-        <h3>Raghav Shetty</h3>
+        <h3 style="color:var(--brand)">Raghav Shetty</h3>
         <p class="role">Head of Operations</p>
         <p class="muted">A seasoned operations head with 10+ years of experience, he excels at optimizing systems and driving sustainable business performance.</p>
       </article>
+
       <article class="card">
         <div class="avatar" aria-hidden="true"></div>
-        <h3>Parmesh K </h3>
+        <h3 style="color:var(--brand)">Parmesh K</h3>
         <p class="role">Head Chef</p>
         <p class="muted">A seasoned chef with 10+ years of experience, he blends tradition with innovation to craft unforgettable flavors.</p>
       </article>
+
       <article class="card">
         <div class="avatar" aria-hidden="true"></div>
-        <h3>Govind Moghekar</h3>
+        <h3 style="color:var(--brand)">Govind Moghekar</h3>
         <p class="role">Head of Marketing & Expansion</p>
         <p class="muted">A seasoned 5+ year expert, he drives business growth through innovative marketing and strategic expansion.</p>
       </article>
@@ -392,6 +300,7 @@ footer {
   <section id="menu" class="container">
     <h2 class="section-title">Menu</h2>
     <p class="section-sub">Simple, authentic, and satisfying. (₹ prices)</p>
+
     <div class="filters" role="tablist" aria-label="Menu categories">
       <button class="filter active" role="tab" aria-selected="true" data-filter="all">All</button>
       <button class="filter" role="tab" data-filter="Idli">Idli</button>
@@ -399,71 +308,51 @@ footer {
       <button class="filter" role="tab" data-filter="Meals">Rice & Meals</button>
       <button class="filter" role="tab" data-filter="Beverages">Beverages</button>
     </div>
+
     <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
   </section>
 
- <!-- Contact (Visit details only) -->
-<section id="contact" class="container">
-  <h2 class="section-title">Contact Us</h2>
-  <p class="section-sub">Drop by, message us, or call — we’re happy to connect.</p>
-  <div class="contact-wrap">
-    <div class="card">
-      <h3>Visit</h3>
-      <p class="muted">HSR Layout, Bengaluru 560102</p>
-      <p><strong>Hours:</strong> 7:00 AM – 11:30 PM (Daily)</p>
-      <p><strong>Phone:</strong> <a href="tel:+919972193336">+91 9972193336</a></p>
-<p>
-  <strong>Franchise Enquiry:</strong>
-  <a href="https://wa.me/919972193336" target="_blank" rel="noopener" style="color:#25D366; font-weight:600;">
-    Connect via WhatsApp
-  </a>
-</p>
+  <!-- Contact -->
+  <section id="contact" class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-sub">Drop by, message us, or call — we’re happy to connect.</p>
 
-      <!-- Embedded Google Map -->
-      <div class="map" style="margin-top:1rem;">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.934288857296!2d77.63684937411934!3d12.91194491618529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1500451069d3%3A0x85bb2f6dd351ffd6!2sBramha%20Cafe!5e0!3m2!1smr!2sin!4v1758230669878!5m2!1smr!2sin"
-          width="100%"
-          height="300"
-          style="border:0; border-radius:12px;"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+    <div class="contact-wrap">
+      <div class="card">
+        <h3 style="color:var(--brand)">Visit</h3>
+        <p class="muted">HSR Layout, Bengaluru 560102</p>
+        <p><strong>Hours:</strong> 7:00 AM – 11:30 PM (Daily)</p>
+        <p><strong>Phone:</strong> <a href="tel:+919972193336" style="color:var(--brand)">+91 9972193336</a></p>
+        <p><strong>Franchise Enquiry:</strong> <a href="https://wa.me/919972193336" target="_blank" rel="noopener" style="color:#25D366;font-weight:600;">Connect via WhatsApp</a></p>
+
+        <div class="map" style="margin-top:1rem;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.934288857296!2d77.63684937411934!3d12.91194491618529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1500451069d3%3A0x85bb2f6dd351ffd6!2sBramha%20Cafe!5e0!3m2!1smr!2sin!4v1758230669878!5m2!1smr!2sin"
+                  width="100%" height="300" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div>
+    </div>
+  </footer>
 
-<!-- Footer -->
-<footer role="contentinfo">
-  <div class="container foot">
-    <div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div>
-  </div>
-</footer>
-
-
-  <!-- JSON‑LD Schema for SEO -->
+  <!-- JSON-LD Schema for SEO -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Bramha Café",
-    "servesCuisine": ["South Indian", "Vegetarian"],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "HSR Layout",
-      "addressRegion": "Karnataka",
-      "postalCode": "560102",
-      "addressCountry": "IN"
-    },
-    "telephone": "+91 99999 99999",
-    "openingHours": ["Mo-Su 07:30-22:30"],
-    "priceRange": "₹₹",
-    "sameAs": [
-      "https://www.instagram.com/", "https://www.facebook.com/"
-    ]
+    "@context":"https://schema.org",
+    "@type":"Restaurant",
+    "name":"Bramha Café",
+    "servesCuisine":["South Indian","Vegetarian"],
+    "address":{"@type":"PostalAddress","addressLocality":"HSR Layout","addressRegion":"Karnataka","postalCode":"560102","addressCountry":"IN"},
+    "telephone":"+91 99999 99999",
+    "openingHours":["Mo-Su 07:30-22:30"],
+    "priceRange":"₹₹",
+    "sameAs":["https://www.instagram.com/","https://www.facebook.com/"]
   }
   </script>
 
@@ -483,8 +372,8 @@ footer {
     const sections = ['home','about','team','menu','contact'];
     const headerLinks = document.querySelectorAll('.nav-links a');
     const setActive = () => {
-      let idx = 0, y = scrollY + 120; // header offset
-      sections.forEach((id,i)=>{const el=document.getElementById(id); if(el && el.offsetTop <= y) idx=i;});
+      let idx = 0, y = scrollY + 120;
+      sections.forEach((id,i)=>{ const el=document.getElementById(id); if(el && el.offsetTop <= y) idx=i; });
       headerLinks.forEach((ln,i)=> ln.classList.toggle('active', i===idx));
     };
     addEventListener('scroll', setActive, {passive:true});
@@ -493,12 +382,12 @@ footer {
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menu data
+    // ===== Menu data & render =====
     const MENU = [
       {cat:'Idli', name:'Plain Idli (2 pcs)', desc:'Soft, fluffy & steamed to perfection', price:70, tag:'Best Seller'},
       {cat:'Idli', name:'Rava Idli (2 pcs)', desc:'Semolina idli with cashews & tempering', price:90},
       {cat:'Dosa', name:'Masala Dosa', desc:'Crispy dosa with spiced potato filling', price:120, tag:'Best Seller'},
-      {cat:'Dosa', name:'Ghee Roast', desc:'Paper‑thin, roasted with ghee', price:140},
+      {cat:'Dosa', name:'Ghee Roast', desc:'Paper-thin, roasted with ghee', price:140},
       {cat:'Dosa', name:'Mysore Masala', desc:'Red chutney spread & potato masala', price:150},
       {cat:'Meals', name:'Curd Rice', desc:'Creamy, tempered with mustard & chilli', price:110},
       {cat:'Meals', name:'Lemon Rice', desc:'Zesty & nutty with curry leaves', price:110},
@@ -508,27 +397,26 @@ footer {
     ];
 
     const grid = document.getElementById('menuGrid');
-const render = (cat='all') => {
-  grid.innerHTML = '';
-  const list = MENU.filter(i => cat==='all' || i.cat===cat);
-  for(const item of list){
-    const el = document.createElement('article');
-    el.className = 'menu-card reveal';
-    el.innerHTML = `
-      <div class="thumb" aria-hidden="true"></div>
-      <div style="flex:1">
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <h3 style="margin:0">${item.name}</h3>
-          ${item.tag ? `<span class="tag">${item.tag}</span>`:''}
-        </div>
-        <div class="muted" style="margin-top:4px">${item.desc}</div>
-      </div>
-      <div class="price">₹ ${item.price}</div>`;
-    grid.appendChild(el);
-  }
-};
-render();
-
+    const render = (cat='all') => {
+      grid.innerHTML = '';
+      const list = MENU.filter(i => cat==='all' || i.cat===cat);
+      for (const item of list){
+        const el = document.createElement('article');
+        el.className = 'menu-card reveal';
+        el.innerHTML = `
+          <div class="thumb" aria-hidden="true"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <h3 style="margin:0;color:var(--brand)">${item.name}</h3>
+              ${item.tag ? `<span class="tag">${item.tag}</span>`:''}
+            </div>
+            <div class="muted" style="margin-top:4px;color:var(--sub)">${item.desc}</div>
+          </div>
+          <div class="price">₹ ${item.price}</div>`;
+        grid.appendChild(el);
+      }
+    };
+    render();
 
     // Filter buttons
     document.querySelectorAll('.filter').forEach(btn=>{
@@ -536,19 +424,19 @@ render();
         document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
         render(btn.dataset.filter);
-      })
+      });
     });
 
-    // Reveal on scroll (reduced‑motion safe)
+    // Reveal on scroll (reduced-motion safe)
     const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!prefersReduced){
       const io = new IntersectionObserver((entries)=>{
         for(const e of entries){
           if(e.isIntersecting){
-            e.target.animate([
-              {opacity:0, transform:'translateY(10px)'},
-              {opacity:1, transform:'translateY(0)'}
-            ],{duration:400, easing:'ease-out', fill:'forwards'});
+            e.target.animate(
+              [{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'translateY(0)'}],
+              {duration:400, easing:'ease-out', fill:'forwards'}
+            );
             io.unobserve(e.target);
           }
         }
