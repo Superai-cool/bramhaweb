@@ -16,136 +16,76 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --------- THEME (light / maroon) --------- */
     :root{
-      --bg:#ffffff;
-      --bg-glow:#fff8f0;
-      --panel:#ffffff;
-      --muted:#f5f5f7;
-      --border:#ececf1;
-      --text:#5a3d3a;
-      --sub:#8a6d69;
-      --brand:#7a1124;
-      --brand-2:#9a1a31;
-      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --bg:#ffffff; --bg-glow:#fff8f0; --panel:#ffffff; --muted:#f5f5f7;
+      --border:#ececf1; --text:#5a3d3a; --sub:#8a6d69;
+      --brand:#7a1124; --brand-2:#9a1a31; --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:18px;
     }
-
-    /* ---------- Base ---------- */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
-      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(60rem 30rem at 0% -10%, var(--bg-glow), transparent 60%),
-        radial-gradient(50rem 25rem at 100% 0%, #fffdf7, transparent 55%),
-        var(--bg);
+      margin:0; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif; color:var(--text);
+      background: radial-gradient(60rem 30rem at 0% -10%, var(--bg-glow), transparent 60%),
+                  radial-gradient(50rem 25rem at 100% 0%, #fffdf7, transparent 55%),
+                  var(--bg);
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{width:min(1200px,92%);margin-inline:auto}
 
-    /* ---------- Header ---------- */
-    header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,.96);
-      border-bottom:1px solid var(--border);
-      backdrop-filter:blur(8px);
-    }
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
     .brand{display:flex;align-items:center;gap:10px}
     .brand-name{font-weight:700;color:var(--brand)}
     .nav-links{display:flex;align-items:center;gap:20px}
-    .nav-links a{
-      padding:10px 12px;border-radius:12px;color:var(--sub);
-      position:relative;transition:.25s;
-    }
-    .nav-links a::after{
-      content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;
-      background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s;
-      border-radius:2px;
-    }
-    .nav-links a:hover,
-    .nav-links a.active{color:var(--brand);background:var(--muted)}
-    .nav-links a:hover::after,
-    .nav-links a.active::after{transform:scaleX(1)}
-
-    /* Hamburger */
+    .nav-links a{padding:10px 12px;border-radius:12px;color:var(--sub);position:relative;transition:.25s}
+    .nav-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s;border-radius:2px}
+    .nav-links a:hover,.nav-links a.active{color:var(--brand);background:var(--muted)}
+    .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
     .hamburger{display:none;flex-direction:column;justify-content:space-between;width:26px;height:18px;background:none;border:0;cursor:pointer}
     .hamburger span{display:block;width:100%;height:2px;background-color:var(--brand);border-radius:1px}
     @media (max-width:768px){.hamburger{display:flex}.nav-links{display:none}}
-
-    /* Mobile menu */
     .mobile{display:none}
     .mobile.open{display:block;border-top:1px solid var(--border);background:#fff}
     .mobile a{display:block;padding:16px 16px;font-size:16px;border-bottom:1px solid var(--border);color:var(--sub)}
     .mobile a:hover{background:var(--muted);color:var(--brand)}
 
-    /* ---------- Hero ---------- */
     .hero{position:relative;isolation:isolate}
     .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:64px 0}
     .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff3e6;color:#b45c2e;border:1px solid #ffd7b1}
     h1{font-size:clamp(28px,5vw,56px);line-height:1.08;margin:14px 0 10px;color:var(--brand)}
     .lead{font-size:clamp(15px,2.6vw,18px);color:var(--sub);max-width:60ch}
     .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-
-    /* Buttons (rounded, animated) */
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:12px 18px;border-radius:14px;
-      border:2px solid var(--brand);background:var(--brand);color:#fff;
-      font-weight:600;transition:transform .2s, background-color .2s, border-color .2s, box-shadow .2s;
-      box-shadow:0 4px 12px rgba(122,17,36,.12);
-    }
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:2px solid var(--brand);background:var(--brand);color:#fff;font-weight:600;transition:transform .2s, background-color .2s, border-color .2s, box-shadow .2s;box-shadow:0 4px 12px rgba(122,17,36,.12)}
     .btn:hover{transform:translateY(-2px);background:var(--brand-2);border-color:var(--brand-2);box-shadow:0 8px 18px rgba(122,17,36,.18)}
     .btn.ghost{background:#fff;color:var(--brand);border-color:var(--brand)}
     .btn.ghost:hover{background:#fff1f3}
-
-    /* Brand buttons */
-    .btn.swiggy{background:#fc8019;border-color:#fc8019}
-    .btn.swiggy:hover{background:#e5710f;border-color:#e5710f}
-    .btn.zomato{background:#e23744;border-color:#e23744}
-    .btn.zomato:hover{background:#c62837;border-color:#c62837}
-
+    .btn.swiggy{background:#fc8019;border-color:#fc8019}.btn.swiggy:hover{background:#e5710f;border-color:#e5710f}
+    .btn.zomato{background:#e23744;border-color:#e23744}.btn.zomato:hover{background:#c62837;border-color:#c62837}
     .trust{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
     .chip{padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:var(--sub);background:#fff}
-
     .hero-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow)}
     .hero-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
 
-    /* ---------- Sections / Headings ---------- */
     section{padding:56px 0}
-    .section-title{
-      font-size:clamp(22px,3.4vw,34px);margin:0 0 8px;
-      color:var(--brand);font-weight:700;display:inline-block;position:relative;transition:transform .25s ease;
-    }
-    .section-title::after{
-      content:"";position:absolute;left:0;bottom:-6px;height:3px;width:0;background:var(--brand);border-radius:2px;transition:width .25s ease;
-    }
+    .section-title{font-size:clamp(22px,3.4vw,34px);margin:0 0 8px;color:var(--brand);font-weight:700;display:inline-block;position:relative;transition:transform .25s ease}
+    .section-title::after{content:"";position:absolute;left:0;bottom:-6px;height:3px;width:0;background:var(--brand);border-radius:2px;transition:width .25s ease}
     .section-title:hover{transform:scale(1.04)}
     .section-title:hover::after{width:100%}
     .section-sub{color:var(--sub);margin:0 0 24px}
 
-    /* ---------- About / Team ---------- */
     .about{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    .about-pic{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff}
+    .about-pic{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff;position:relative}
     .usps{display:flex;flex-wrap:wrap;gap:10px}
     .usps .chip{background:#fff}
 
-    /* Team grid fixed 4 columns on desktop */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
     .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
     .avatar{aspect-ratio:1;border-radius:12px;background:#f5f5f7;border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
     .role{color:var(--sub);font-size:.95rem}
 
-    /* ---------- Menu ---------- */
     .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
     .filter{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--sub);cursor:pointer;transition:.2s}
     .filter.active,.filter:hover{background:#fff1f3;color:var(--brand);border-color:#f0cdd3}
@@ -155,15 +95,9 @@
     .tag{font-size:.75rem;padding:6px 8px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--brand)}
     .price{margin-left:auto;font-weight:700;color:var(--brand)}
 
-    /* ---------- Contact ---------- */
-    .contact-wrap{display:grid;grid-template-columns:1fr;gap:18px}
-    .map{min-height:280px;border-radius:16px;border:1px solid var(--border);background:#fff;overflow:hidden}
-
-    /* ---------- Footer ---------- */
     footer{border-top:1px solid var(--border);background:#fff;padding:24px 0;color:var(--sub)}
     .foot{display:flex;justify-content:center;align-items:center;text-align:center}
 
-    /* ---------- Responsive ---------- */
     @media (max-width:1024px){
       .hero-wrap,.about{grid-template-columns:1fr}
       .team-grid{grid-template-columns:repeat(2,1fr)}
@@ -174,78 +108,30 @@
       .hero-wrap{padding:34px 0}
       section{padding:44px 0}
     }
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      html{scroll-behavior:auto}
+    /* ====== About Carousel (fixed) ====== */
+    .carousel{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff}
+    .carousel .slides{display:flex;width:100%;height:100%;transition:transform .45s ease}
+    .carousel img{width:100%;height:100%;object-fit:cover;flex:0 0 100%;user-select:none;pointer-events:none;aspect-ratio:4/3}
+    .carousel .nav{
+      position:absolute;top:50%;transform:translateY(-50%);
+      border:0;width:40px;height:40px;border-radius:999px;
+      background:rgba(255,255,255,.95);color:var(--brand);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;z-index:2;line-height:1
     }
-
-    /* ====== About Carousel (NEW) ====== */
-    .carousel {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #fff;
+    .carousel .nav:hover{background:#fff1f3}
+    .carousel .nav.prev{left:10px}
+    .carousel .nav.next{right:10px}
+    .carousel .nav svg{display:block}
+    .carousel .dots{
+      position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+      display:flex;gap:8px;justify-content:center;z-index:2
     }
-    .carousel .slides {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform .45s ease;
-    }
-    .carousel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      flex: 0 0 100%;
-      user-select: none;
-      pointer-events: none;
-      aspect-ratio: 4 / 3;
-    }
-    .carousel .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      color: var(--brand);
-      font-size: 22px;
-      font-weight: 700;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,.08);
-      cursor: pointer;
-    }
-    .carousel .nav:hover { background:#fff1f3; }
-    .carousel .nav.prev { left: 10px; }
-    .carousel .nav.next { right: 10px; }
-
-    .carousel .dots {
-      position: absolute;
-      left: 0; right: 0; bottom: 10px;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-    }
-    .carousel .dot {
-      width: 7px; height: 7px;
-      border-radius: 999px;
-      background: rgba(122,17,36,.25);
-      border: 1px solid rgba(122,17,36,.15);
-      cursor: pointer;
-      transition: transform .2s, background .2s;
-    }
-    .carousel .dot.active {
-      background: var(--brand);
-      transform: scale(1.2);
-    }
-    @media (prefers-reduced-motion: reduce){
-      .carousel .slides { transition: none; }
-    }
+    .carousel .dot{width:7px;height:7px;border-radius:999px;background:rgba(122,17,36,.25);border:1px solid rgba(122,17,36,.15);cursor:pointer;transition:transform .2s, background .2s}
+    .carousel .dot.active{background:var(--brand);transform:scale(1.2)}
+    @media (prefers-reduced-motion: reduce){.carousel .slides{transition:none}}
   </style>
 </head>
 <body>
@@ -257,23 +143,13 @@
         <div class="brand-name">Bramha Café</div>
       </a>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#team">Team</a>
-        <a href="#menu">Menu</a>
-        <a href="#contact">Contact Us</a>
+        <a href="#home">Home</a><a href="#about">About Us</a><a href="#team">Team</a><a href="#menu">Menu</a><a href="#contact">Contact Us</a>
       </nav>
-      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
     </div>
     <div id="mobileNav" class="mobile" role="dialog" aria-label="Mobile menu">
       <div class="container">
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#team">Team</a>
-        <a href="#menu">Menu</a>
-        <a href="#contact">Contact Us</a>
+        <a href="#home">Home</a><a href="#about">About Us</a><a href="#team">Team</a><a href="#menu">Menu</a><a href="#contact">Contact Us</a>
       </div>
     </div>
   </header>
@@ -289,10 +165,7 @@
           <a class="btn swiggy" href="https://www.swiggy.com/city/bangalore/bramha-cafe-hsr-layout-rest966996" target="_blank" rel="noopener">Order on Swiggy</a>
           <a class="btn zomato" href="https://www.zomato.com/bangalore/bramha-cafe-2-hsr-bangalore/orderm" target="_blank" rel="noopener">Order on Zomato</a>
         </div>
-        <div class="trust">
-          <span class="chip">🧼 Hygienic Kitchen</span>
-          <span class="chip">✨ Elegant Vibe</span>
-        </div>
+        <div class="trust"><span class="chip">🧼 Hygienic Kitchen</span><span class="chip">✨ Elegant Vibe</span></div>
       </div>
       <aside class="hero-card" aria-label="Featured ambience">
         <div class="hero-img" aria-hidden="true">
@@ -320,7 +193,7 @@
         </div>
       </div>
 
-      <!-- NEW: slideshow -->
+      <!-- Slideshow -->
       <div class="about-pic">
         <div class="carousel" id="aboutCarousel" aria-label="Bramha Café gallery">
           <div class="slides">
@@ -328,8 +201,16 @@
             <img src="images/about1.png" alt="Bramha Café — counter & decor">
             <img src="images/about3.png" alt="Bramha Café — seating & ambience">
           </div>
-          <button class="nav prev" aria-label="Previous">‹</button>
-          <button class="nav next" aria-label="Next">›</button>
+          <button class="nav prev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="nav next" aria-label="Next">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
           <div class="dots" aria-hidden="true"></div>
         </div>
       </div>
@@ -343,38 +224,26 @@
     <p class="section-sub">People behind Bramha Cafe.</p>
     <div class="team-grid">
       <article class="card">
-        <div class="avatar">
-          <img src="images/team/shashank.jpg" alt="Shashank Bhandari — Founder & CEO" loading="lazy">
-        </div>
-        <h3>Shashank Bhandari</h3>
-        <p class="role">Founder & CEO</p>
+        <div class="avatar"><img src="images/team/shashank.jpg" alt="Shashank Bhandari — Founder & CEO" loading="lazy"></div>
+        <h3>Shashank Bhandari</h3><p class="role">Founder & CEO</p>
         <p class="muted">A serial entrepreneur with 10+ years in the food industry, he has built and scaled multiple brands from scratch with vision and hands-on leadership.</p>
       </article>
 
       <article class="card">
-        <div class="avatar">
-          <img src="images/team/raghav.jpg" alt="Raghav Shetty — Head of Operations" loading="lazy">
-        </div>
-        <h3>Raghav Shetty</h3>
-        <p class="role">Head of Operations</p>
+        <div class="avatar"><img src="images/team/raghav.jpg" alt="Raghav Shetty — Head of Operations" loading="lazy"></div>
+        <h3>Raghav Shetty</h3><p class="role">Head of Operations</p>
         <p class="muted">A seasoned operations head with 10+ years of experience, he excels at optimizing systems and driving sustainable business performance.</p>
       </article>
 
       <article class="card">
-        <div class="avatar">
-          <img src="images/team/parmesh.jpg" alt="Parmesh — Head Chef" loading="lazy">
-        </div>
-        <h3>Parmesh</h3>
-        <p class="role">Head Chef</p>
+        <div class="avatar"><img src="images/team/parmesh.jpg" alt="Parmesh — Head Chef" loading="lazy"></div>
+        <h3>Parmesh</h3><p class="role">Head Chef</p>
         <p class="muted">A seasoned chef with 10+ years of experience, he blends tradition with innovation to craft unforgettable flavors.</p>
       </article>
 
       <article class="card">
-        <div class="avatar">
-          <img src="images/team/govind.jpg" alt="Govind Moghekar — Head of Marketing" loading="lazy">
-        </div>
-        <h3>Govind Moghekar</h3>
-        <p class="role">Head of Marketing</p>
+        <div class="avatar"><img src="images/team/govind.jpg" alt="Govind Moghekar — Head of Marketing" loading="lazy"></div>
+        <h3>Govind Moghekar</h3><p class="role">Head of Marketing</p>
         <p class="muted">A seasoned 5+ year expert, he drives business growth through innovative marketing and strategic expansion.</p>
       </article>
     </div>
@@ -409,31 +278,23 @@
         <p><strong>Phone:</strong> <a href="tel:+919972193336" style="color:var(--brand)">+91 9972193336</a></p>
         <p>
           <strong>Franchise Enquiry:</strong>
-          <a href="https://wa.me/919972193336" target="_blank" rel="noopener" style="color:#25D366; font-weight:600;">
-            Connect via WhatsApp
-          </a>
+          <a href="https://wa.me/919972193336" target="_blank" rel="noopener" style="color:#25D366; font-weight:600;">Connect via WhatsApp</a>
         </p>
 
         <div class="map" style="margin-top:1rem;">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.934288857296!2d77.63684937411934!3d12.91194491618529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1500451069d3%3A0x85bb2f6dd351ffd6!2sBramha%20Cafe!5e0!3m2!1smr!2sin!4v1758230669878!5m2!1smr!2sin"
-            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.934288857296!2d77.63684937411934!3d12.91194491618529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1500451069d3%3A0x85bb2f6dd351ffd6!2sBramha%20Cafe!5e0!3m2!1smr!2sin!4v1758230669878!5m2!1smr!2sin"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer role="contentinfo">
-    <div class="container foot">
-      <div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div>
-    </div>
+    <div class="container foot"><div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div></div>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Mobile menu toggle
+    // Mobile menu
     const burger = document.querySelector('.hamburger');
     const mobile = document.getElementById('mobileNav');
     const navLinks = document.querySelectorAll('header nav a, #mobileNav a');
@@ -443,7 +304,7 @@
     });
     navLinks.forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
 
-    // Active link on scroll (header highlight)
+    // Active link highlight
     const sections = ['home','about','team','menu','contact'];
     const headerLinks = document.querySelectorAll('.nav-links a');
     const setActive = () => {
@@ -457,7 +318,7 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menu data
+    // Menu render
     const MENU = [
       {cat:'Idli', name:'Idli (2 pcs)', desc:'Soft, fluffy & steamed to perfection', price:70, tag:'Best Seller', img:'images/menu/idli-plain.jpg'},
       {cat:'Idli', name:'Thatte Idli (1 pcs)', desc:'Semolina idli with cashews & tempering', price:90, img:'images/menu/thatte.jpg'},
@@ -470,8 +331,6 @@
       {cat:'Beverages', name:'Filter Coffee', desc:'Strong decoction & frothy top', price:60, tag:'Signature', img:'images/menu/coffee.jpg'},
       {cat:'Beverages', name:'Tea', desc:'Light, spiced & refreshing', price:50, img:'images/menu/tea.jpg'}
     ];
-
-    // Render menu
     const grid = document.getElementById('menuGrid');
     const render = (cat='all') => {
       grid.innerHTML = '';
@@ -495,8 +354,6 @@
       }
     };
     render();
-
-    // Filter buttons
     document.querySelectorAll('.filter').forEach(btn=>{
       btn.addEventListener('click',()=>{
         document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
@@ -505,7 +362,7 @@
       })
     });
 
-    /* ====== About Carousel JS (NEW) ====== */
+    /* About Carousel */
     (function initAboutCarousel(){
       const root = document.getElementById('aboutCarousel');
       if(!root) return;
@@ -516,10 +373,8 @@
       const nextBtn = root.querySelector('.nav.next');
       const dotsWrap = root.querySelector('.dots');
 
-      let i = 0;
-      let auto, isHover = false;
+      let i = 0, auto, isHover = false;
 
-      // dots
       images.forEach((_, idx)=>{
         const d = document.createElement('button');
         d.className = 'dot' + (idx===0 ? ' active' : '');
@@ -539,30 +394,21 @@
       function next(){ goTo(i+1); }
       function prev(){ goTo(i-1); }
 
-      // autoplay
       function start(){ auto = setInterval(next, 4000); }
       function stop(){ clearInterval(auto); }
       function restart(){ stop(); if(!isHover) start(); }
 
-      // controls
       nextBtn.addEventListener('click', ()=>goTo(i+1, true));
       prevBtn.addEventListener('click', ()=>goTo(i-1, true));
-
-      // pause on hover
       root.addEventListener('mouseenter', ()=>{ isHover = true; stop(); });
       root.addEventListener('mouseleave', ()=>{ isHover = false; start(); });
 
-      // swipe
       let sx = 0, dx = 0;
       root.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; dx = 0; }, {passive:true});
       root.addEventListener('touchmove',  e=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
-      root.addEventListener('touchend',  ()=>{
-        if(Math.abs(dx) > 40) (dx < 0 ? next() : prev());
-        restart();
-      });
+      root.addEventListener('touchend',  ()=>{ if(Math.abs(dx)>40) (dx<0?next():prev()); restart(); });
 
-      goTo(0);
-      start();
+      goTo(0); start();
     })();
   </script>
 </body>
