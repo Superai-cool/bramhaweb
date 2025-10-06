@@ -75,10 +75,38 @@
     .section-title:hover::after{width:100%}
     .section-sub{color:var(--sub);margin:0 0 24px}
 
-    .about{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
-    .about-pic{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff;position:relative}
-    .usps{display:flex;flex-wrap:wrap;gap:10px}
-    .usps .chip{background:#fff}
+   .about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* text left, slideshow right */
+  gap: 28px;
+  align-items: start;              /* align from top, not center */
+}
+
+.about-pic {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  position: relative;
+}
+
+.usps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.usps .chip {
+  background: #fff;
+}
+
+/* Responsive */
+@media (max-width:1024px){
+  .about {
+    grid-template-columns: 1fr; /* stack on smaller screens */
+  }
+}
+
 
     .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
     .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
