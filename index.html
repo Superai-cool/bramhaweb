@@ -16,148 +16,192 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
+    /* --------- THEME (light / maroon) --------- */
     :root{
-      --bg:#ffffff;
-      --text:#5a3d3a;     /* brick color */
-      --sub:#8a6d69;      /* lighter brick */
-      --brand:#7a1124;    /* maroon */
-      --brand-hover:#9a1a31;
+      --bg:#ffffff;                     /* page background */
+      --bg-glow:#fff8f0;               /* subtle warm glow */
+      --panel:#ffffff;                 /* cards / panels */
+      --muted:#f5f5f7;                 /* soft hover chips bg */
+      --border:#ececf1;                /* light borders */
+      --text:#5a3d3a;                  /* brick text */
+      --sub:#8a6d69;                   /* lighter brick */
+      --brand:#7a1124;                 /* maroon */
+      --brand-2:#9a1a31;               /* maroon hover */
       --shadow:0 10px 30px rgba(0,0,0,.08);
       --radius:18px;
     }
 
+    /* ---------- Base ---------- */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:'Poppins',sans-serif;
-      background:radial-gradient(circle at top left,#fff8f0,transparent 50%), var(--bg);
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(60rem 30rem at 0% -10%, var(--bg-glow), transparent 60%),
+        radial-gradient(50rem 25rem at 100% 0%, #fffdf7, transparent 55%),
+        var(--bg);
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{width:min(1200px,92%);margin-inline:auto}
 
-    /* Header */
+    /* ---------- Header ---------- */
     header{
       position:sticky;top:0;z-index:50;
-      background:rgba(255,255,255,.95);
-      border-bottom:1px solid #eee;
-      backdrop-filter:blur(6px);
+      background:rgba(255,255,255,.96);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(8px);
     }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
     .brand{display:flex;align-items:center;gap:10px}
     .brand-name{font-weight:700;color:var(--brand)}
-    .nav-links{display:flex;gap:20px}
-    .nav-links a{padding:10px 12px;border-radius:10px;color:var(--sub)}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{
+      padding:10px 12px;border-radius:12px;color:var(--sub);
+      position:relative;transition:.25s;
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;
+      background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .25s;
+      border-radius:2px;
+    }
     .nav-links a:hover,
-    .nav-links a.active{background:#f9f9f9;color:var(--brand);}
+    .nav-links a.active{color:var(--brand);background:var(--muted)}
+    .nav-links a:hover::after,
+    .nav-links a.active::after{transform:scaleX(1)}
 
     /* Hamburger */
     .hamburger{display:none;flex-direction:column;justify-content:space-between;width:26px;height:18px;background:none;border:0;cursor:pointer}
-    .hamburger span{display:block;width:100%;height:2px;background-color:var(--brand)}
-    @media(max-width:768px){.hamburger{display:flex}.nav-links{display:none}}
+    .hamburger span{display:block;width:100%;height:2px;background-color:var(--brand);border-radius:1px}
+    @media (max-width:768px){.hamburger{display:flex}.nav-links{display:none}}
 
+    /* Mobile menu */
     .mobile{display:none}
-    .mobile.open{display:block;background:#fff;border-top:1px solid #eee}
-    .mobile a{display:block;padding:16px;color:var(--sub);border-bottom:1px solid #eee}
-    .mobile a:hover{color:var(--brand);background:#f9f9f9}
+    .mobile.open{display:block;border-top:1px solid var(--border);background:#fff}
+    .mobile a{display:block;padding:16px 16px;font-size:16px;border-bottom:1px solid var(--border);color:var(--sub)}
+    .mobile a:hover{background:var(--muted);color:var(--brand)}
 
-    /* Hero */
+    /* ---------- Hero ---------- */
+    .hero{position:relative;isolation:isolate}
     .hero-wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:64px 0}
-    .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#fff3e6;color:#b45c2e;font-size:.9rem}
-    h1{font-size:clamp(28px,5vw,52px);line-height:1.1;margin:14px 0 10px;color:var(--brand)}
-    .lead{color:var(--sub);max-width:60ch;font-size:1rem}
-    .cta{display:flex;gap:12px;margin-top:18px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff3e6;color:#b45c2e;border:1px solid #ffd7b1}
+    h1{font-size:clamp(28px,5vw,56px);line-height:1.08;margin:14px 0 10px;color:var(--brand)}
+    .lead{font-size:clamp(15px,2.6vw,18px);color:var(--sub);max-width:60ch}
+    .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
 
+    /* Buttons (rounded, animated) */
     .btn{
-      padding:12px 20px;
-      border-radius:var(--radius);
-      border:2px solid var(--brand);
-      background:var(--brand);color:#fff;font-weight:600;
-      transition:.25s;
-      box-shadow:0 4px 10px rgba(0,0,0,.08)
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 18px;border-radius:14px;
+      border:2px solid var(--brand);background:var(--brand);color:#fff;
+      font-weight:600;transition:transform .2s, background-color .2s, border-color .2s, box-shadow .2s;
+      box-shadow:0 4px 12px rgba(122,17,36,.12);
     }
-    .btn:hover{background:var(--brand-hover);border-color:var(--brand-hover);transform:translateY(-2px)}
+    .btn:hover{transform:translateY(-2px);background:var(--brand-2);border-color:var(--brand-2);box-shadow:0 8px 18px rgba(122,17,36,.18)}
+    .btn.ghost{background:#fff;color:var(--brand);border-color:var(--brand)}
+    .btn.ghost:hover{background:#fff1f3}
+
+    /* Brand buttons */
     .btn.swiggy{background:#fc8019;border-color:#fc8019}
     .btn.swiggy:hover{background:#e5710f;border-color:#e5710f}
     .btn.zomato{background:#e23744;border-color:#e23744}
     .btn.zomato:hover{background:#c62837;border-color:#c62837}
 
-    .chip{padding:6px 12px;border-radius:999px;background:#f9f9f9;color:var(--sub);border:1px solid #eee}
-    .trust{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+    .trust{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .chip{padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:var(--sub);background:#fff}
 
-    .hero-card{background:#fff;border:1px solid #eee;border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
+    .hero-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:12px;box-shadow:var(--shadow)}
+    .hero-img{aspect-ratio:4/3;border-radius:14px;overflow:hidden}
 
-    /* Section headings with hover animation */
+    /* ---------- Sections / Headings ---------- */
     section{padding:56px 0}
     .section-title{
-      font-size:clamp(22px,3.5vw,34px);
-      color:var(--brand);
-      font-weight:700;
-      display:inline-block;
-      position:relative;
-      transition:all .3s ease;
+      font-size:clamp(22px,3.4vw,34px);margin:0 0 8px;
+      color:var(--brand);font-weight:700;display:inline-block;position:relative;transition:transform .25s ease;
     }
     .section-title::after{
-      content:"";
-      position:absolute;left:0;bottom:-4px;
-      width:0%;height:3px;background:var(--brand);
-      transition:width .3s ease;
+      content:"";position:absolute;left:0;bottom:-6px;height:3px;width:0;background:var(--brand);border-radius:2px;transition:width .25s ease;
     }
     .section-title:hover{transform:scale(1.04)}
     .section-title:hover::after{width:100%}
     .section-sub{color:var(--sub);margin:0 0 24px}
 
-    /* Cards / Menu */
-    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-    .card{background:#fff;border:1px solid #eee;border-radius:var(--radius);padding:16px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
-    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
-    .avatar{aspect-ratio:1;border-radius:12px;background:#f5f5f5;margin-bottom:12px}
+    /* ---------- About / Team ---------- */
+    .about{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+    .about-pic{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#fff}
+    .usps{display:flex;flex-wrap:wrap;gap:10px}
+    .usps .chip{background:#fff}
 
-    .filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
-    .filter{padding:10px 14px;border-radius:12px;border:1px solid #eee;background:#fff;color:var(--sub);cursor:pointer}
+    .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;transition:.25s;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .avatar{aspect-ratio:1;border-radius:12px;background:#f5f5f7;border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
+    .role{color:var(--sub);font-size:.95rem}
+
+    /* ---------- Menu ---------- */
+    .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+    .filter{padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#fff;color:var(--sub);cursor:pointer;transition:.2s}
     .filter.active,.filter:hover{background:#fff1f3;color:var(--brand);border-color:#f0cdd3}
     .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .menu-card{display:flex;gap:12px;background:#fff;border:1px solid #eee;border-radius:var(--radius);padding:12px}
+    .menu-card{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:16px;padding:12px}
+    .thumb{width:90px;aspect-ratio:1;border-radius:12px;background:#f5f5f7;border:1px solid var(--border);flex:0 0 auto;overflow:hidden}
+    .tag{font-size:.75rem;padding:6px 8px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--brand)}
     .price{margin-left:auto;font-weight:700;color:var(--brand)}
 
-    /* Contact */
-    .map{min-height:280px;border-radius:16px;border:1px solid #eee}
-    footer{border-top:1px solid #eee;background:#fff;padding:20px;color:var(--sub);text-align:center}
+    /* ---------- Contact ---------- */
+    .contact-wrap{display:grid;grid-template-columns:1fr;gap:18px}
+    .map{min-height:280px;border-radius:16px;border:1px solid var(--border);background:#fff;overflow:hidden}
 
-    @media(max-width:1024px){
+    /* ---------- Footer ---------- */
+    footer{border-top:1px solid var(--border);background:#fff;padding:24px 0;color:var(--sub)}
+    .foot{display:flex;justify-content:center;align-items:center;text-align:center}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1024px){
       .hero-wrap,.about{grid-template-columns:1fr}
       .team-grid{grid-template-columns:repeat(2,1fr)}
       .menu-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media(max-width:680px){
-      .team-grid,.menu-grid{grid-template-columns:1fr}
-      section{padding:40px 0}
+    @media (max-width:680px){
+      .menu-grid,.team-grid{grid-template-columns:1fr}
+      .hero-wrap{padding:34px 0}
+      section{padding:44px 0}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
     }
   </style>
 </head>
-
 <body>
   <!-- Header -->
-  <header>
+  <header aria-label="Primary">
     <div class="container nav">
-      <a class="brand" href="#home">
-        <img src="images/bramha-logo.png" alt="Bramha Café Logo" style="height:36px; border-radius:10px;">
+      <a class="brand" href="#home" aria-label="Bramha Café home">
+        <img src="images/bramha-logo.png" alt="Bramha Café Logo" style="height:36px; border-radius:10px;" />
         <div class="brand-name">Bramha Café</div>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#about">About Us</a>
         <a href="#team">Team</a>
         <a href="#menu">Menu</a>
         <a href="#contact">Contact Us</a>
       </nav>
-      <button class="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div id="mobileNav" class="mobile">
+    <div id="mobileNav" class="mobile" role="dialog" aria-label="Mobile menu">
       <div class="container">
-        <a href="#home">Home</a><a href="#about">About Us</a><a href="#team">Team</a><a href="#menu">Menu</a><a href="#contact">Contact Us</a>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#team">Team</a>
+        <a href="#menu">Menu</a>
+        <a href="#contact">Contact Us</a>
       </div>
     </div>
   </header>
@@ -166,27 +210,48 @@
   <main id="home" class="hero">
     <div class="container hero-wrap">
       <div>
-        <span class="badge">🌿 Pure Veg • Authentic Taste</span>
+        <span class="badge" aria-label="Pure Veg & Authentic">🌿 Pure Veg • Authentic Taste</span>
         <h1>South Indian Flavours, Crafted with Love.</h1>
         <p class="lead">Crispy dosas, fluffy idlis, aromatic sambar and the city’s favourite filter coffee — served fresh in a premium ambience. Made daily. Made right.</p>
-        <div class="cta">
-          <a class="btn swiggy" href="#">Order on Swiggy</a>
-          <a class="btn zomato" href="#">Order on Zomato</a>
+        <div class="cta" role="group" aria-label="Primary actions">
+          <a class="btn swiggy" href="https://www.swiggy.com/city/bangalore/bramha-cafe-hsr-layout-rest966996" target="_blank" rel="noopener">Order on Swiggy</a>
+          <a class="btn zomato" href="https://www.zomato.com/bangalore/bramha-cafe-2-hsr-bangalore/orderm" target="_blank" rel="noopener">Order on Zomato</a>
         </div>
         <div class="trust">
           <span class="chip">🧼 Hygienic Kitchen</span>
           <span class="chip">✨ Elegant Vibe</span>
         </div>
       </div>
-      <aside class="hero-card"><img src="images/hero.png" alt="Bramha Café Ambience" style="width:100%;border-radius:14px;"></aside>
+      <aside class="hero-card" aria-label="Featured ambience">
+        <div class="hero-img" aria-hidden="true">
+          <img src="images/hero.png" alt="Bramha Café Ambience" style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+      </aside>
     </div>
   </main>
 
   <!-- About -->
-  <section id="about" class="container">
+  <section id="about" class="container" style="max-width: 1200px; margin: 0 auto;">
     <h2 class="section-title">About Us</h2>
-    <p class="section-sub">Tradition meets precision.</p>
-    <p>At <strong>Bramha Café</strong>, we source quality ingredients, follow time-honoured recipes, and serve with contemporary finesse.</p>
+    <p class="section-sub">Where tradition meets precision.</p>
+
+    <div class="about">
+      <div>
+        <p style="line-height:1.8;margin:0">
+          At <strong>Bramha Café</strong>, we source quality ingredients, follow time-honoured recipes, and plate with contemporary finesse — all while keeping it comforting and quick.
+        </p>
+        <div class="usps" style="margin-top: 1rem;">
+          <span class="chip" role="listitem">🥥 Fresh Coconut Chutneys</span>
+          <span class="chip" role="listitem">🥘 Crispy, Golden Dosas</span>
+          <span class="chip" role="listitem">🍛 Aromatic Sambar</span>
+          <span class="chip" role="listitem">☕ Filter Coffee</span>
+        </div>
+      </div>
+
+      <div class="about-pic">
+        <img src="images/about.png" alt="Inside Bramha Café" style="width:100%;height:auto;object-fit:cover;">
+      </div>
+    </div>
   </section>
 
   <!-- Team -->
@@ -194,37 +259,157 @@
     <h2 class="section-title">Our Team</h2>
     <p class="section-sub">People behind Bramha Cafe.</p>
     <div class="team-grid">
-      <article class="card"><div class="avatar"></div><h3>Shashank Bhandari</h3><p class="role">Founder & CEO</p></article>
-      <article class="card"><div class="avatar"></div><h3>Raghav Shetty</h3><p class="role">Head of Operations</p></article>
-      <article class="card"><div class="avatar"></div><h3>Parmesh K</h3><p class="role">Head Chef</p></article>
-      <article class="card"><div class="avatar"></div><h3>Govind Moghekar</h3><p class="role">Head of Marketing</p></article>
+      <article class="card">
+        <div class="avatar"><!-- <img src="images/team/shashank.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"> --></div>
+        <h3>Shashank Bhandari</h3>
+        <p class="role">Founder & CEO</p>
+        <p class="muted">A serial entrepreneur with 10+ years in the food industry, he has built and scaled multiple brands from scratch with vision and hands-on leadership.</p>
+      </article>
+      <article class="card">
+        <div class="avatar"></div>
+        <h3>Raghav Shetty</h3>
+        <p class="role">Head of Operations</p>
+        <p class="muted">A seasoned operations head with 10+ years of experience, he excels at optimizing systems and driving sustainable business performance.</p>
+      </article>
+      <article class="card">
+        <div class="avatar"></div>
+        <h3>Parmesh K</h3>
+        <p class="role">Head Chef</p>
+        <p class="muted">Blends tradition with innovation to craft unforgettable flavours.</p>
+      </article>
+      <article class="card">
+        <div class="avatar"></div>
+        <h3>Govind Moghekar</h3>
+        <p class="role">Head of Marketing & Expansion</p>
+        <p class="muted">Drives business growth through innovative marketing and strategic expansion.</p>
+      </article>
     </div>
   </section>
 
   <!-- Menu -->
   <section id="menu" class="container">
     <h2 class="section-title">Menu</h2>
-    <p class="section-sub">Simple, authentic, satisfying.</p>
-    <div class="filters"><button class="filter active">All</button><button class="filter">Idli</button><button class="filter">Dosa</button><button class="filter">Meals</button><button class="filter">Beverages</button></div>
-    <div class="menu-grid"><div class="menu-card"><div style="flex:1">Idli Sample</div><div class="price">₹ 70</div></div></div>
+    <p class="section-sub">Simple, authentic, and satisfying. (₹ prices)</p>
+
+    <div class="filters" role="tablist" aria-label="Menu categories">
+      <button class="filter active" role="tab" aria-selected="true" data-filter="all">All</button>
+      <button class="filter" role="tab" data-filter="Idli">Idli</button>
+      <button class="filter" role="tab" data-filter="Dosa">Dosa</button>
+      <button class="filter" role="tab" data-filter="Meals">Rice & Meals</button>
+      <button class="filter" role="tab" data-filter="Beverages">Beverages</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid" aria-live="polite"></div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="container">
     <h2 class="section-title">Contact Us</h2>
-    <p class="section-sub">We’re happy to connect.</p>
-    <p><strong>Phone:</strong> <a href="tel:+919972193336" style="color:var(--brand)">+91 9972193336</a></p>
-    <p><strong>Franchise Enquiry:</strong> <a href="https://wa.me/919972193336" style="color:#25D366;font-weight:600">Connect via WhatsApp</a></p>
-    <div class="map"><iframe src="https://www.google.com/maps/embed?..."></iframe></div>
+    <p class="section-sub">Drop by, message us, or call — we’re happy to connect.</p>
+
+    <div class="contact-wrap">
+      <div class="card" style="background:#fff;border:1px solid var(--border);">
+        <h3 style="color:var(--brand);margin-top:0">Visit</h3>
+        <p class="muted">HSR Layout, Bengaluru 560102</p>
+        <p><strong>Hours:</strong> 7:00 AM – 11:30 PM (Daily)</p>
+        <p><strong>Phone:</strong> <a href="tel:+919972193336" style="color:var(--brand)">+91 9972193336</a></p>
+        <p>
+          <strong>Franchise Enquiry:</strong>
+          <a href="https://wa.me/919972193336" target="_blank" rel="noopener" style="color:#25D366; font-weight:600;">
+            Connect via WhatsApp
+          </a>
+        </p>
+
+        <div class="map" style="margin-top:1rem;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.934288857296!2d77.63684937411934!3d12.91194491618529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1500451069d3%3A0x85bb2f6dd351ffd6!2sBramha%20Cafe!5e0!3m2!1smr!2sin!4v1758230669878!5m2!1smr!2sin"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer><div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div></footer>
+  <footer role="contentinfo">
+    <div class="container foot">
+      <div>© <span id="year"></span> Bramha Café. Made with ❤️ in HSR.</div>
+    </div>
+  </footer>
 
+  <!-- Scripts -->
   <script>
-    document.getElementById('year').textContent=new Date().getFullYear();
-    const burger=document.querySelector('.hamburger'),mobile=document.getElementById('mobileNav');
-    burger.addEventListener('click',()=>mobile.classList.toggle('open'));
+    // Mobile menu toggle
+    const burger = document.querySelector('.hamburger');
+    const mobile = document.getElementById('mobileNav');
+    const navLinks = document.querySelectorAll('header nav a, #mobileNav a');
+    burger?.addEventListener('click', () => {
+      const open = mobile.classList.toggle('open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
+
+    // Active link on scroll (header highlight)
+    const sections = ['home','about','team','menu','contact'];
+    const headerLinks = document.querySelectorAll('.nav-links a');
+    const setActive = () => {
+      let idx = 0, y = scrollY + 120; // header offset
+      sections.forEach((id,i)=>{const el=document.getElementById(id); if(el && el.offsetTop <= y) idx=i;});
+      headerLinks.forEach((ln,i)=> ln.classList.toggle('active', i===idx));
+    };
+    addEventListener('scroll', setActive, {passive:true});
+    addEventListener('load', setActive);
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menu data
+    const MENU = [
+      {cat:'Idli', name:'Plain Idli (2 pcs)', desc:'Soft, fluffy & steamed to perfection', price:70, tag:'Best Seller', img:'images/menu/idli-plain.jpg'},
+      {cat:'Idli', name:'Rava Idli (2 pcs)', desc:'Semolina idli with cashews & tempering', price:90, img:'images/menu/idli-rava.jpg'},
+      {cat:'Dosa', name:'Masala Dosa', desc:'Crispy dosa with spiced potato filling', price:120, tag:'Best Seller', img:'images/menu/dosa-masala.jpg'},
+      {cat:'Dosa', name:'Ghee Roast', desc:'Paper-thin, roasted with ghee', price:140, img:'images/menu/dosa-ghee.jpg'},
+      {cat:'Dosa', name:'Mysore Masala', desc:'Red chutney spread & potato masala', price:150, img:'images/menu/dosa-mysore.jpg'},
+      {cat:'Meals', name:'Curd Rice', desc:'Creamy, tempered with mustard & chilli', price:110, img:'images/menu/curd-rice.jpg'},
+      {cat:'Meals', name:'Lemon Rice', desc:'Zesty & nutty with curry leaves', price:110, img:'images/menu/lemon-rice.jpg'},
+      {cat:'Meals', name:'Sambar Rice', desc:'Comforting, with veggies & spices', price:120, img:'images/menu/sambar-rice.jpg'},
+      {cat:'Beverages', name:'Filter Coffee', desc:'Strong decoction & frothy top', price:60, tag:'Signature', img:'images/menu/filter-coffee.jpg'},
+      {cat:'Beverages', name:'Buttermilk', desc:'Light, spiced & refreshing', price:50, img:'images/menu/buttermilk.jpg'}
+    ];
+
+    // Render menu
+    const grid = document.getElementById('menuGrid');
+    const render = (cat='all') => {
+      grid.innerHTML = '';
+      const list = MENU.filter(i => cat==='all' || i.cat===cat);
+      for(const item of list){
+        const el = document.createElement('article');
+        el.className = 'menu-card';
+        el.innerHTML = `
+          <div class="thumb" aria-hidden="true">
+            ${item.img ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : ``}
+          </div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <h3 style="margin:0">${item.name}</h3>
+              ${item.tag ? `<span class="tag">${item.tag}</span>`:''}
+            </div>
+            <div class="muted" style="margin-top:4px;color:var(--sub)">${item.desc}</div>
+          </div>
+          <div class="price">₹ ${item.price}</div>`;
+        grid.appendChild(el);
+      }
+    };
+    render();
+
+    // Filter buttons
+    document.querySelectorAll('.filter').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        render(btn.dataset.filter);
+      })
+    });
   </script>
 </body>
 </html>
