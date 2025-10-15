@@ -389,42 +389,46 @@ With warm interiors, soulful music, and the aroma of freshly ground coffee, Bram
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menu render
-    const MENU = [
-      {cat:'Idli', name:'Idli (2 pcs)', desc:'Soft, fluffy & steamed to perfection', price:50, tag:'Best Seller', img:'images/menu/idli-plain.jpg'},
-      {cat:'Idli', name:'Thatte Idli (1 pcs)', desc:'Semolina idli with cashews & tempering', price:50, img:'images/menu/thatte.jpg'},
-      {cat:'Dosa', name:'Benne Masala Dosa', desc:'Crispy dosa with spiced potato filling', price:90, tag:'Best Seller', img:'images/menu/bennemasaladosa.jpg'},
-      {cat:'Dosa', name:'Set Dosa', desc:'Paper-thin, roasted with ghee', price:90, img:'images/menu/setdosa.jpg'},
-      {cat:'Dosa', name:'Rava Dosa', desc:'Red chutney spread & potato masala', price:120, img:'images/menu/ravadosa.jpg'},
-      {cat:'Meals', name:'Ragi Mudde Thali', desc:'Creamy, tempered with mustard & chilli', price:150, img:'images/menu/ragimudde.jpg'},
-      {cat:'Meals', name:'Akki Roti Thali', desc:'Zesty & nutty with curry leaves', price:150, img:'images/menu/akkiroti.jpg'},
-      {cat:'Meals', name:'South Indian Thali', desc:'Comforting, with veggies & spices', price:150, img:'images/menu/south.jpg'},
-      {cat:'Beverages', name:'Filter Coffee', desc:'Strong decoction & frothy top', price:25, tag:'Signature', img:'images/menu/coffee.jpg'},
-      {cat:'Beverages', name:'Tea', desc:'Light, spiced & refreshing', price:25, img:'images/menu/tea.jpg'}
-    ];
-    const grid = document.getElementById('menuGrid');
-    const render = (cat='all') => {
-      grid.innerHTML = '';
-      const list = MENU.filter(i => cat==='all' || i.cat===cat);
-      for(const item of list){
-        const el = document.createElement('article');
-        el.className = 'menu-card';
-        el.innerHTML = `
-          <div class="thumb" aria-hidden="true">
-            ${item.img ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : ``}
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <h3 style="margin:0">${item.name}</h3>
-              ${item.tag ? `<span class="tag">${item.tag}</span>`:''}
-            </div>
-            <div class="muted" style="margin-top:4px;color:var(--sub)">${item.desc}</div>
-          </div>
-          <div class="price">₹ ${item.price}</div>`;
-        grid.appendChild(el);
-      }
-    };
-    render();
+  // Menu render
+const MENU = [
+  {cat:'Idli', name:'Idli (2 pcs)', desc:'Soft, fluffy & steamed to perfection', price:50, tag:'Best Seller', img:'images/menu/idli-plain.jpg'},
+  {cat:'Idli', name:'Thatte Idli (1 pcs)', desc:'Semolina idli with cashews & tempering', price:50, img:'images/menu/thatte.jpg'},
+  {cat:'Dosa', name:'Benne Masala Dosa', desc:'Crispy dosa with spiced potato filling', price:90, tag:'Best Seller', img:'images/menu/bennemasaladosa.jpg'},
+  {cat:'Dosa', name:'Set Dosa', desc:'Paper-thin, roasted with ghee', price:90, img:'images/menu/setdosa.jpg'},
+  {cat:'Dosa', name:'Rava Dosa', desc:'Red chutney spread & potato masala', price:120, img:'images/menu/ravadosa.jpg'},
+  {cat:'Meals', name:'Ragi Mudde Thali', desc:'Creamy, tempered with mustard & chilli', price:150, img:'images/menu/ragimudde.jpg'},
+  {cat:'Meals', name:'Akki Roti Thali', desc:'Zesty & nutty with curry leaves', price:150, img:'images/menu/akkiroti.jpg'},
+  {cat:'Meals', name:'South Indian Thali', desc:'Comforting, with veggies & spices', price:150, img:'images/menu/south.jpg'},
+  {cat:'Beverages', name:'Filter Coffee', desc:'Strong decoction & frothy top', price:25, tag:'Signature', img:'images/menu/coffee.jpg'},
+  {cat:'Beverages', name:'Tea', desc:'Light, spiced & refreshing', price:25, img:'images/menu/tea.jpg'}
+];
+
+const grid = document.getElementById('menuGrid');
+
+const render = (cat='all') => {
+  grid.innerHTML = '';
+  const list = MENU.filter(i => cat === 'all' || i.cat === cat);
+  for (const item of list) {
+    const el = document.createElement('article');
+    el.className = 'menu-card';
+    el.innerHTML = `
+      <div class="thumb" aria-hidden="true">
+        ${item.img ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : ``}
+      </div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <h3 style="margin:0">${item.name}</h3>
+          ${item.tag ? `<span class="tag">${item.tag}</span>` : ''}
+        </div>
+        <div class="muted" style="margin-top:4px;color:var(--sub)">${item.desc}</div>
+      </div>
+    `;
+    grid.appendChild(el);
+  }
+};
+
+render();
+
     document.querySelectorAll('.filter').forEach(btn=>{
       btn.addEventListener('click',()=>{
         document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
